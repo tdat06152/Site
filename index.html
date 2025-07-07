@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Sunburst Chart</title>
+    <!-- Load Google Charts library -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
       html, body { margin:0; padding:0; height:100%; }
@@ -12,34 +13,39 @@
   <body>
     <div id="sunburst"></div>
     <script>
-      // Load gói sunburst
-      google.charts.load('current',{packages:['sunburst']});
+      // 1. Load gói sunburst
+      google.charts.load('current', { packages: ['sunburst'] });
       google.charts.setOnLoadCallback(drawChart);
-      function drawChart(){
+
+      function drawChart() {
+        // 2. Khởi tạo DataTable với đúng thứ tự cột: id (string), size (number), parent (string)
         var data = new google.visualization.DataTable();
-        // Thứ tự cột bắt buộc: id (string), size (number), parent (string)
-        data.addColumn('string','id');
-        data.addColumn('number','size');
-        data.addColumn('string','parent');
+        data.addColumn('string', 'id');
+        data.addColumn('number', 'size');
+        data.addColumn('string', 'parent');
+
+        // 3. Thêm dữ liệu [id, size, parent]
         data.addRows([
-          ['A',0,null],
-          ['B',0,'A'],
-          ['C',0,'B'],
-          ['A1',1,'A'],
-          ['A2',1,'A'],
-          ['B1',1,'B'],
-          ['B2',1,'B'],
-          ['C1',1,'C'],
-          ['C2',1,'C']
+          ['A',  0,   null],
+          ['B',  0,   'A'],
+          ['C',  0,   'B'],
+          ['A1', 1,   'A'],
+          ['A2', 1,   'A'],
+          ['B1', 1,   'B'],
+          ['B2', 1,   'B'],
+          ['C1', 1,   'C'],
+          ['C2', 1,   'C']
         ]);
+
+        // 4. Vẽ chart
         var chart = new google.visualization.Sunburst(
           document.getElementById('sunburst')
         );
-        chart.draw(data,{
-          allowCollapse:false,
-          legend:'none',
-          tooltip:{trigger:'focus'},
-          colorAxis:{colors:['#f5f5f5','#8bc34a','#4caf50']}
+        chart.draw(data, {
+          allowCollapse: false,
+          legend: 'none',
+          tooltip: { trigger: 'focus' },
+          colorAxis: { colors: ['#f5f5f5', '#8bc34a', '#4caf50'] }
         });
       }
     </script>
