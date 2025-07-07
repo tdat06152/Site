@@ -1,0 +1,9 @@
+/**
+ * Khi có request GET, sẽ trả về nội dung của file Index.html
+ * và cho phép được nhúng trong iframe (ALLOWALL)
+ */
+function doGet() {
+  return HtmlService
+    .createHtmlOutputFromFile('Index')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
